@@ -1,0 +1,24 @@
+﻿- type: chatTone
+  id: AskTone
+  regex: "\\?$"
+  paired: "chat-manager-entity-ask-wrap-message"
+
+- type: chatTone
+  id: DeclareTone
+  regex: "(?i)is|are"
+  paired: "chat-manager-entity-declares-wrap-message"
+
+- type: chatTone
+  id: ScreamTone
+  regex: "\\!\\!\\!$"
+  paired: "chat-manager-entity-screams-wrap-message"
+
+- type: chatTone
+  id: YellTone
+  regex: "\\!\\!$"
+  paired: "chat-manager-entity-yells-wrap-message"
+
+- type: chatTone
+  id: ExclaimTone
+  regex: "\\!\\!$"
+  paired: "chat-manager-entity-exclaims-wrap-message"

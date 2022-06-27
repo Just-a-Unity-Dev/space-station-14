@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -234,7 +235,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (channel != null)
             _listener.PingListeners(source, message, channel);
 
-        var messageWrap = Loc.GetString("chat-manager-entity-say-wrap-message",
+        var wrapTemplate = GetToneFromString(message); // Returns "chat-manager-entity-say-wrap-message" by default, returns something else by the tone
+        var messageWrap = Loc.GetString(wrapTemplate,
             ("entityName", Name(source)));
 
         SendInVoiceRange(ChatChannel.Local, message, messageWrap, source, hideChat);
@@ -339,6 +341,28 @@ public sealed partial class ChatSystem : SharedChatSystem
     #endregion
 
     #region Utility
+    /// <summary>
+    ///     Input a string, outputs the correct tone that you can get with Loc.GetString();
+    /// </summary>
+    private string GetToneFromString(string text)
+    {
+        var toneRegex = _prototypeManager.EnumeratePrototypes<ChatTonePrototype>().ToArray();
+        var tone = "chat-manager-entity-say-wrap-message";
+
+        // TODO REMOVE THIS, IT IS A SIN
+        Console.WriteLine(toneRegex);
+
+        foreach (var t in toneRegex)
+        {
+            if (Regex.IsMatch(t.Regex, text))
+            {
+                tone = t.Paired;
+                break;
+            }
+        }
+
+        return tone;
+    }
 
     /// <summary>
     ///     Sends a chat message to the given players in range of the source entity.
