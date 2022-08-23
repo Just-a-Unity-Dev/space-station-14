@@ -427,6 +427,9 @@
   id: Spear
 
 - type: Tag
+  id: Speedloader
+
+- type: Tag
   id: StringInstrument
 
 - type: Tag

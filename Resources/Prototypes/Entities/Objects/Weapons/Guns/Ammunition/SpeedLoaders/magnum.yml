@@ -8,6 +8,9 @@
     whitelist:
       tags:
         - CartridgeMagnum
+  - type: Tag
+    tags:
+      - Speedloader
     capacity: 6
   - type: Sprite
     netsync: false

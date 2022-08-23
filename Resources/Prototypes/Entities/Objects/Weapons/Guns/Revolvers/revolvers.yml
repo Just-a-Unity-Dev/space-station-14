@@ -23,7 +23,7 @@
   - type: RevolverAmmoProvider
     whitelist:
       tags:
-        - CartridgeMagnum
+        - Speedloader
     proto: CartridgeMagnum
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]

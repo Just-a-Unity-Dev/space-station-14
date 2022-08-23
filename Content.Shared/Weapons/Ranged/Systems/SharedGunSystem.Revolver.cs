@@ -1,4 +1,5 @@
 using Content.Shared.Interaction;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -73,7 +74,10 @@ public partial class SharedGunSystem
 
     public bool TryRevolverInsert(RevolverAmmoProviderComponent component, EntityUid uid, EntityUid? user)
     {
+        Logger.Debug("Attempted revolver insert with " + EntityManager.GetComponent<MetaDataComponent>(uid).EntityName);
         if (component.Whitelist?.IsValid(uid, EntityManager) == false) return false;
+
+        Logger.Debug("Item is whitelisted.");
 
         for (var i = 0; i < component.Capacity; i++)
         {
@@ -82,8 +86,29 @@ public partial class SharedGunSystem
             if (component.AmmoSlots[index] != null ||
                 component.Chambers[index] != null) continue;
 
-            component.AmmoSlots[index] = uid;
-            component.AmmoContainer.Insert(uid);
+            if (TagSystem.HasTag(uid, "Speedloader"))
+            {
+                Logger.Debug("Item is speedloader.");
+                // need to transfer contents from the Speedloader to the revolver
+                if (Containers.TryGetContainer(uid, "ballistic-ammo", out var container))
+                {
+                    Logger.Debug("Entity Count: " + container.ContainedEntities.Count);
+                    foreach (var bullet in container.ContainedEntities)
+                    {
+                        Logger.Debug("Transferred.");
+                        // do the sthuff
+                        Logger.Debug("Bullet UID: " + bullet + " | Name: " + EntityManager.GetComponent<MetaDataComponent>(bullet).EntityName);
+                        component.AmmoSlots[index] = bullet;
+                        component.AmmoContainer.Insert(bullet);
+                    }
+                }
+            }
+            else
+            {
+                component.AmmoSlots[index] = uid;
+                component.AmmoContainer.Insert(uid);
+            }
+
             PlaySound(component.Owner, component.SoundInsert?.GetSound(Random, ProtoManager), user);
             Popup(Loc.GetString("gun-revolver-insert"), component.Owner, user);
             UpdateRevolverAppearance(component);
@@ -93,6 +118,7 @@ public partial class SharedGunSystem
         }
 
         Popup(Loc.GetString("gun-revolver-full"), component.Owner, user);
+        Logger.Debug("Gun is full.");
         return false;
     }
 
