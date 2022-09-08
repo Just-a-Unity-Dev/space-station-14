@@ -1,0 +1,23 @@
+﻿- type: entity
+  id: WallViewcone
+  noSpawn: true
+  components:
+    - type: Physics
+      bodyType: Static
+    - type: Fixtures
+      fixtures:
+        - shape:
+            !type:PhysShapeAabb
+            bounds: "-0.5,-0.5,0.5,0.5"
+          mask:
+            - FullTileMask
+          layer:
+            - WallLayer
+    - type: Occluder
+      sizeX: 32
+      sizeY: 32
+    - type: Sprite
+      netsync: false
+      drawdepth: Ghosts
+      sprite: _Frigid/Structures/Walls/cone.rsi
+      state: full
