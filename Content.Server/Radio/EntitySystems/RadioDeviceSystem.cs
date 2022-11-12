@@ -140,9 +140,9 @@ public sealed class RadioDeviceSystem : EntitySystem
         RaiseLocalEvent(args.Source, nameEv);
 
         var name = Loc.GetString("speech-name-relay", ("speaker", Name(uid)),
-            ("originalName", nameEv.Name)); ;
+            ("originalName", nameEv.Name));
 
         var hideGlobalGhostChat = true; // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Speak, false, nameOverride: name, hideGlobalGhostChat:hideGlobalGhostChat); 
+        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Speak, false, nameOverride: name, hideGlobalGhostChat:hideGlobalGhostChat);
     }
 }

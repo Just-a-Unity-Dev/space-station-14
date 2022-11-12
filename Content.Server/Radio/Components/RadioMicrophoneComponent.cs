@@ -15,8 +15,10 @@ public sealed class RadioMicrophoneComponent : Component
     public string BroadcastChannel = "Common";
 
     [DataField("listenRange")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public int ListenRange  = 4;
 
     [DataField("enabled")]
+    [ViewVariables(VVAccess.ReadWrite)]
     public bool Enabled = false;
 }
