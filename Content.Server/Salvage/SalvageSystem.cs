@@ -163,6 +163,7 @@ namespace Content.Server.Salvage
                     }
                     gridState.ActiveMagnets.Add(component);
                     component.MagnetState = new MagnetState(MagnetStateType.Attaching, gridState.CurrentTime + AttachingTime);
+                    RaiseLocalEvent(new SalvageMagnetActivatedEvent(component.Owner));
                     Report(component.Owner, component.SalvageChannel, "salvage-system-report-activate-success");
                     break;
                 case MagnetStateType.Attaching:
@@ -221,9 +222,10 @@ namespace Content.Server.Salvage
             angle = Angle.Zero;
             var tsc = Transform(component.Owner);
             coords = new EntityCoordinates(component.Owner, component.Offset).ToMap(EntityManager);
-            if (_mapManager.TryGetGrid(tsc.GridUid, out var magnetGrid))
+
+            if (_mapManager.TryGetGrid(tsc.GridUid, out var magnetGrid) && TryComp<TransformComponent>(magnetGrid.GridEntityId, out var gridXform))
             {
-                angle = magnetGrid.WorldRotation;
+                angle = gridXform.WorldRotation;
             }
         }
 
@@ -366,7 +368,7 @@ namespace Content.Server.Salvage
                 var gridId = gridIdAndState.Key;
                 // Not handling the case where the salvage we spawned got paused
                 // They both need to be paused, or it doesn't make sense
-                if (_mapManager.IsGridPaused(gridId)) continue;
+                if (MetaData(gridId).EntityPaused) continue;
                 state.CurrentTime += secondsPassed;
 
                 var deleteQueue = new RemQueue<SalvageMagnetComponent>();
