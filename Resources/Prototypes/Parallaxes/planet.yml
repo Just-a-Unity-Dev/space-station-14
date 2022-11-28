@@ -24,6 +24,16 @@
       shader: ""
 
 - type: parallax
+  id: Ground
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/Tiles/Asteroid/asteroid_coarse_sand.png"
+      slowness: 0
+      scale: "1, 1"
+      shader: ""
+
+- type: parallax
   id: Snow
   layers:
     - texture:

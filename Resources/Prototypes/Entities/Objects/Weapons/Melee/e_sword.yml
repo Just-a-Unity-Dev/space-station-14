@@ -7,8 +7,7 @@
   - type: EnergySword
     litDamageBonus:
         types:
-            Slash: 8.5
-            Heat: 8.5
+            Heat: 20
             Blunt: -4.5
     litDisarmMalus: 0.6
   - type: Sprite
@@ -50,6 +49,15 @@
         shader: unshaded
   - type: DisarmMalus
     malus: 0
+  - type: Blocking
+    passiveBlockModifier: PassiveRiotShieldBlock
+    activeBlockModifier: ActiveRiotShieldBlock
+    blockingToggleAction:
+      name: action-name-blocking
+      description: action-description-blocking
+      icon: Objects/Weapons/Melee/e_sword.rsi/e_sword.png
+      iconOn: Objects/Weapons/Melee/e_sword.rsi/e_sword_blade.png
+      event: !type:ToggleActionEvent
 
 - type: entity
   name: pen

@@ -170,6 +170,48 @@
     soundForce: true
 
 - type: entity
+  name : taser bolt
+  id: BulletTaser
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: FlyBySound
+      sound:
+        collection: EnergyMiss
+        params:
+          volume: 5
+    - type: Sprite
+      noRot: true
+      color: "#ffff33"
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+      layers:
+        - state: spark
+          shader: unshaded
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        - shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          id: projectile
+          mask:
+            - Impassable
+            - BulletImpassable
+        - *flybyfixture
+    - type: Ammo
+    - type: StaminaDamageOnCollide
+      damage: 50
+    - type: Projectile
+      impactEffect: BulletImpactEffectDisabler
+      damage:
+        types:
+          Heat: 5
+      soundHit:
+        path: "/Audio/Weapons/tap.ogg"
+      soundForce: true
+
+- type: entity
   name : disabler bolt practice
   id: BulletDisablerPractice
   parent: BaseBullet

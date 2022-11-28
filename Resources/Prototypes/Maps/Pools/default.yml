@@ -1,11 +1,19 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  - Bagel
-  - Box
-  - Cluster
-  - Kettle
-  - Marathon
-  - Omega
-  - Pillar
-  - Moose
+    - Bagel
+    - Box
+    - Cluster
+    - Kettle
+    - Marathon
+    - Omega
+    - Pillar
+    - Moose
+
+- type: gameMapPool
+  id: RainMapPool
+  maps:
+    - Bagel
+    - Box
+    - Marathon
+    - Moose

@@ -286,6 +286,9 @@
       quickEquip: false
       slots:
         - Belt
+    - type: Battery
+      maxCharge: 400
+      startingCharge: 400
     - type: Gun
       fireRate: 2
       soundGunshot:
@@ -321,14 +324,12 @@
     - type: ProjectileBatteryAmmoProvider
       proto: BulletDisablerPractice
       fireCost: 100
-      
+
 - type: entity
   name: taser
   parent: BaseWeaponBatterySmall
   id: WeaponTaser
   description: A low-capacity, energy-based stun gun used by security teams to subdue targets at range.
-  # Use Disabler
-  suffix: Obsolete
   components:
   - type: Tag
     tags:
@@ -351,7 +352,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: BulletDisabler
+    proto: BulletTaser
     fireCost: 100
   - type: MagazineVisuals
     magState: mag
