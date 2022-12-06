@@ -59,8 +59,8 @@
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
+  - type: ProjectileBatteryAmmoProvider
+    proto: RedBolt
     fireCost: 62.5
   - type: MagazineVisuals
     magState: mag
@@ -84,8 +84,8 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/makeshift.rsi
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
+  - type: ProjectileBatteryAmmoProvider
+    proto: RedBolt
     fireCost: 62.5
   - type: Battery
     maxCharge: 500
@@ -111,8 +111,8 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaser
+  - type: ProjectileBatteryAmmoProvider
+    proto: RedBolt
     fireCost: 62.5
 
 - type: entity
@@ -121,8 +121,8 @@
   id: WeaponLaserCarbinePractice
   description: A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice.
   components:
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLaserPractice
+  - type: ProjectileBatteryAmmoProvider
+    proto: RedPracticeBolt
     fireCost: 62.5
 
 - type: entity
@@ -381,8 +381,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: RedMediumLaser
+  - type: ProjectileBatteryAmmoProvider
+    proto: RedMediumBolt
     fireCost: 100
   - type: BatterySelfRecharger
     autoRecharge: true
@@ -414,8 +414,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
-    proto: RedMediumLaser
+  - type: ProjectileBatteryAmmoProvider
+    proto: RedMediumBolt
     fireCost: 100
   - type: BatterySelfRecharger
     autoRecharge: true

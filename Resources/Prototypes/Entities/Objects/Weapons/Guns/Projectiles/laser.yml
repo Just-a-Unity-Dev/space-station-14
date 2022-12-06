@@ -1,0 +1,65 @@
+﻿- type: entity
+  name: RedBolt
+  parent: BaseBullet
+  id: BaseLaserBolt
+  abstract: true
+  components:
+    - type: FlyBySound
+      sound:
+        collection: EnergyMiss
+        params:
+          volume: 5
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      layers:
+        - state: bolt
+          shader: unshaded
+          rotation: 90
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        - shape:
+            !type:PhysShapeAabb
+            bounds: "-0.15,-0.3,0.15,0.3"
+          hard: false
+          id: projectile
+          mask:
+            - Impassable
+            - BulletImpassable
+    - type: Ammo
+    - type: Projectile
+      impactEffect: BulletImpactEffectLaser
+      damage:
+        types:
+          Heat: 0
+      soundHit:
+        path: "/Audio/Weapons/tap.ogg"
+      soundForce: true
+
+- type: entity
+  name: red bolt
+  id: RedBolt
+  parent: BaseLaserBolt
+  noSpawn: true
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Heat: 14
+
+- type: entity
+  name : red bolt
+  id: RedMediumBolt
+  parent: BaseLaserBolt
+  noSpawn: true
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Heat: 24
+
+- type: entity
+  name : red bolt
+  id: RedPracticleBolt
+  parent: BaseLaserBolt
+  noSpawn: true
