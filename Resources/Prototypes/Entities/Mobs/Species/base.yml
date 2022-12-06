@@ -39,7 +39,7 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 15 #per second, scales with pressure and other constants.
+        Blunt: 2.5 #per second, scales with pressure and other constants.
   - type: DamageOnHighSpeedImpact
     damage:
       types:
