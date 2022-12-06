@@ -1,7 +1,7 @@
 - type: dynamicPrices
   id: Default
-  weights:
-    Nukeops: 60
+  prices:
+    Nukeops: 50
     Traitor: 25
     Zombie: 80
     Pirates: 15

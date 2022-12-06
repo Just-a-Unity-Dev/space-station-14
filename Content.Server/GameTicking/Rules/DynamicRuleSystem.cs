@@ -40,30 +40,38 @@ public sealed class DynamicRuleSystem : GameRuleSystem
     private void PickRules()
     {
         Logger.InfoS("gamepreset", $"Now buying presets with a threat level of {_threatLevel}.");
-        var pricesPrototype = _prototypeManager.Index<DynamicPriceListPrototype>("Default");
-        var pricesKeys = new List<string>(pricesPrototype.Prices.Keys);
-        var presets = Array.Empty<string>();
-
-        while (pricesKeys.Count > 0)
+        if (_prototypeManager.TryIndex<DynamicPriceListPrototype>("Default", out var pricesPrototype))
         {
-            var preset = _random.PickAndTake(pricesKeys);
-            var price = pricesPrototype.Prices[preset];
-            if (price >= _threatLevel)
+            var pricesKeys = new List<string>(pricesPrototype.Prices.Keys);
+            var presets = Array.Empty<string>();
+            var money = _threatLevel;
+
+            while (pricesKeys.Count > 0)
             {
-                presets.Append(preset);
-                _threatLevel -= price;
-                Logger.InfoS("gamepreset", $"Spent {price} on {preset}.");
+                var preset = _random.PickAndTake(pricesKeys);
+                var price = pricesPrototype.Prices[preset];
+
+                if (price >= money)
+                {
+                    presets.Append(preset);
+                    money -= price;
+                    Logger.InfoS("gamepreset", $"Spent {price} on {preset}, currently have {money} left.");
+                }
+            }
+
+            foreach (var preset in presets)
+            {
+                var rules = _prototypeManager.Index<GamePresetPrototype>(preset).Rules;
+                Logger.InfoS("gamepreset", $"Running preset: {preset}.");
+                foreach (var rule in rules)
+                {
+                    _ticker.StartGameRule(_prototypeManager.Index<GameRulePrototype>(rule));
+                }
             }
         }
-
-        foreach (var preset in presets)
+        else
         {
-            var rules = _prototypeManager.Index<GamePresetPrototype>(preset).Rules;
-            Logger.InfoS("gamepreset", $"Running preset: {preset}.");
-            foreach (var rule in rules)
-            {
-                _ticker.StartGameRule(_prototypeManager.Index<GameRulePrototype>(rule));
-            }
+            Logger.Error("Could not index DynamicPriceListPrototype.");
         }
     }
 }
