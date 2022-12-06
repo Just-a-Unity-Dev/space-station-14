@@ -1,2 +1,2 @@
-extended-title = Extended
-extended-description = A calm experience. Admin intervention required.
+extended-title = Greenshift
+extended-description = Orbiting a green-class star, safely tucked in Nanotrasen controlled space. Your only risks are bored crewmen and incompetence.

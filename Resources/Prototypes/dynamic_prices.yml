@@ -1,0 +1,6 @@
+- type: dynamicPrices
+  id: Default
+  weights:
+    Nukeops: 60
+    Traitor: 25
+    Zombie: 80

@@ -11,13 +11,23 @@
 - type: gamePreset
   id: Extended
   alias:
-  - extended
-  - shittersafari
+    - extended
+    - shittersafari
   name: extended-title
   showInVote: false #2boring2vote
   description: extended-description
   rules:
-  - BasicStationEventScheduler
+    - BasicStationEventScheduler
+
+- type: gamePreset
+  id: Dynamic
+  alias:
+    - dynamic
+  showInVote: true
+  name: dynamic-title
+  description: dynamic-description
+  rules:
+    - Dynamic
 
 - type: gamePreset
   id: Secret
