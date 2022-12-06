@@ -7,7 +7,7 @@
   id: ExGrenade
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Grenades/grenade.rsi
+    sprite: Objects/Weapons/Grenades/frag.rsi
     layers:
     - state: icon
       map: ["enum.TriggerVisualLayers.Base"]
