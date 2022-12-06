@@ -61,6 +61,12 @@
     id: Secret
 
 - type: gameRule
+  id: Dynamic
+  config:
+    !type:GenericGameRuleConfiguration
+    id: Dynamic
+
+- type: gameRule
   id: Zombie
   config:
     !type:GenericGameRuleConfiguration

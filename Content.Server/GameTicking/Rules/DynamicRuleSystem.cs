@@ -39,9 +39,10 @@ public sealed class DynamicRuleSystem : GameRuleSystem
 
     private void PickRules()
     {
+        Logger.InfoS("gamepreset", $"Now buying presets with a threat level of {_threatLevel}.");
         var pricesPrototype = _prototypeManager.Index<DynamicPriceListPrototype>("Default");
         var pricesKeys = new List<string>(pricesPrototype.Prices.Keys);
-        var presets = new string[] {};
+        var presets = Array.Empty<string>();
 
         while (pricesKeys.Count > 0)
         {
