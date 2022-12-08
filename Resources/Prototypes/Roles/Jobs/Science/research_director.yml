@@ -13,7 +13,7 @@
   icon: "ResearchDirector"
   requireAdminNotify: true
   supervisors: job-supervisors-captain
-  canBeAntag: false
+  antagAdvantage: 6
   access:
   - Research
   - Command

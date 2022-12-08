@@ -15,7 +15,7 @@
   startingGear: QuartermasterGear
   icon: "QuarterMaster"
   supervisors: job-supervisors-hop
-  canBeAntag: false
+  antagAdvantage: 6
   access:
   - Cargo
   - Salvage
