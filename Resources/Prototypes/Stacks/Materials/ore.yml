@@ -14,7 +14,7 @@
 
 - type: stack
   id: PlasmaOre
-  name: plasma ore
+  name: phoron ore
   icon: /Textures/Objects/Materials/ore.rsi/plasma.png
   spawn: PlasmaOre1
   maxCount: 30

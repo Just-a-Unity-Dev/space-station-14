@@ -1,8 +1,8 @@
 # Glass
 materials-glass = glass
 materials-reinforced-glass = reinforced glass
-materials-plasma-glass = plasma glass
-materials-reinforced-plasma-glass = reinforced plasma glass
+materials-plasma-glass = phoron glass
+materials-reinforced-plasma-glass = reinforced phoron glass
 
 # Metals
 materials-steel = steel
@@ -14,7 +14,7 @@ materials-plasteel = plasteel
 materials-biomass = biomass
 materials-cloth = cloth
 materials-durathread = durathread
-materials-plasma = plasma
+materials-plasma = phoron
 materials-plastic = plastic
 materials-wood = wood
 materials-uranium = uranium

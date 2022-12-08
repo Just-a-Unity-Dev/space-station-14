@@ -16,8 +16,8 @@ ent-NitrogenCanister = Nitrogen canister
 ent-CarbonDioxideCanister = Carbon dioxide canister
     .desc = A canister that can contain any type of gas. This one is supposed to contain carbon dioxide. It can be attached to connector ports using a wrench.
 
-ent-PlasmaCanister = Plasma canister
-    .desc = A canister that can contain any type of gas. This one is supposed to contain plasma. It can be attached to connector ports using a wrench.
+ent-PlasmaCanister = Phoron canister
+    .desc = A canister that can contain any type of gas. This one is supposed to contain phoron. It can be attached to connector ports using a wrench.
 
 ent-TritiumCanister = Tritium canister
     .desc = A canister that can contain any type of gas. This one is supposed to contain tritium. It can be attached to connector ports using a wrench.

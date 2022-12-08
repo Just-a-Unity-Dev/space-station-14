@@ -143,7 +143,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  name: plasma wall
+  name: phoron wall
   id: PlasmaWall
   graph: Girder
   startNode: start
@@ -253,7 +253,7 @@
   canRotate: false
 
 - type: construction
-  name: plasma window
+  name: phoron window
   id: PlasmaWindow
   graph: Window
   startNode: start
@@ -272,7 +272,7 @@
   canRotate: false
 
 - type: construction
-  name: reinforced plasma window
+  name: reinforced phoron window
   id: ReinforcedPlasmaWindow
   graph: Window
   startNode: start
@@ -327,7 +327,7 @@
   placementMode: SnapgridCenter
 
 - type: construction
-  name: directional plasma window
+  name: directional phoron window
   id: PlasmaWindowDirectional
   graph: WindowDirectional
   startNode: start
@@ -345,7 +345,7 @@
   placementMode: SnapgridCenter
 
 - type: construction
-  name: directional reinforced plasma window
+  name: directional reinforced phoron window
   id: PlasmaReinforcedWindowDirectional
   graph: WindowDirectional
   startNode: start
@@ -683,7 +683,7 @@
     - !type:TileNotBlocked
 
 - type: construction
-  name: plasma door
+  name: phoron door
   id: PlasmaDoor
   graph: DoorGraph
   startNode: start

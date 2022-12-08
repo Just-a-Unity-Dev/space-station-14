@@ -13,5 +13,5 @@ ent-CrateMaterialWood = Wood crate
 ent-CrateMaterialPlasteel = Plasteel crate
     .desc = 90 sheets of plasteel.
 
-ent-CrateMaterialPlasma = Solid plasma crate
-    .desc = 90 sheets of plasma.
+ent-CrateMaterialPlasma = Solid phoron crate
+    .desc = 90 sheets of phoron.
