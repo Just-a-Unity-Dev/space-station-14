@@ -448,7 +448,7 @@
         acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
-        damage: 600
+        damage: 1
       behaviors:
       - !type:ChangeConstructionNodeBehavior
         node: girder
@@ -483,7 +483,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1000
+        damage: 1
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -690,7 +690,7 @@
         acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
-        damage: 300
+        damage: 1
       behaviors:
       - !type:PlaySoundBehavior
         sound:
