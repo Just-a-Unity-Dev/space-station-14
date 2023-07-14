@@ -33,7 +33,7 @@ namespace Content.Client.Stylesheets
                 {
                     "/Fonts/WhiteRabbit/whiterabbit.ttf"
                 },
-                10
+                11
             );
             var notoSans10 = resCache.GetFont
             (

@@ -43,13 +43,13 @@ namespace Content.Client.Stylesheets
 
         protected StyleBase(IResourceCache resCache)
         {
-            var wariowareinc = resCache.GetFont
+            var whiteRabbit = resCache.GetFont
             (
                 new []
                 {
                     "/Fonts/WhiteRabbit/whiterabbit.ttf"
                 },
-                12
+                13
             );
 
             var notoSans12 = resCache.GetFont
@@ -168,7 +168,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(null, null, null, null),
                     new[]
                     {
-                        new StyleProperty("font", wariowareinc),
+                        new StyleProperty("font", whiteRabbit),
                     }),
 
                 // Default font.
@@ -176,7 +176,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(null, new[] {StyleClassItalic}, null, null),
                     new[]
                     {
-                        new StyleProperty("font", wariowareinc),
+                        new StyleProperty("font", whiteRabbit),
                     }),
 
                 // Window close button base texture.
