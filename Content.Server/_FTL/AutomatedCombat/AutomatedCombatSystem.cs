@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Server._FTL.ShipHealth;
 using Content.Server._FTL.Weapons;
 using Content.Server.Atmos.EntitySystems;
@@ -14,13 +15,12 @@ using Robust.Shared.Random;
 namespace Content.Server._FTL.AutomatedCombat;
 
 /// <summary>
-/// This handles...
+/// This handles ships automatically firing at the main ship.
 /// </summary>
 public sealed class AutomatedCombatSystem : EntitySystem
 {
     [Dependency] private readonly WeaponTargetingSystem _weaponTargetingSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
 
@@ -93,25 +93,88 @@ public sealed class AutomatedCombatSystem : EntitySystem
         while (query.MoveNext(out var entity, out var activeComponent, out var component))
         {
             activeComponent.TimeSinceLastAttack += frameTime;
-            if (activeComponent.TimeSinceLastAttack >= component.AttackRepetition)
+            if (activeComponent.TimeSinceLastAttack < component.AttackRepetition)
+                continue;
+
+            var mainShips = EntityQuery<MainCharacterShipComponent>().ToList();
+
+            if (mainShips.Count <= 0)
+                break;
+
+            var mainShip = _random.Pick(mainShips).Owner;
+
+            var weapons = GetWeaponsOnGrid(entity);
+            var weapon = _random.Pick(weapons);
+
+            if (!TryComp<FTLWeaponComponent>(weapon, out var weaponComponent))
+                return;
+
+            var foundValidTile = false;
+            EntityCoordinates? validTile = null;
+
+            bool CorrectDistance(Vector2 position, float limit, out float distance)
             {
-                var mainShips = EntityQuery<MainCharacterShipComponent>().ToList();
+                distance = 0f;
+                if (!component.LastFiredCoordinates.HasValue)
+                    return true;
+                distance = Vector2.Distance(component.LastFiredCoordinates.Value.Position, position);
+                return distance >= limit;
+            }
 
-                if (mainShips.Count <= 0)
-                    break;
-
-                var mainShip = _random.Pick(mainShips).Owner;
-
-                var weapons = GetWeaponsOnGrid(entity);
-                var weapon = _random.Pick(weapons);
-
-                if (TryComp<FTLWeaponComponent>(weapon, out var weaponComponent) && TryFindRandomTile(mainShip, out _, out var coordinates))
+            // one fuck of a function
+            // this whole section just makes sure that shots are properly spaced apart from each other
+            var attempts = 0;
+            while (!foundValidTile)
+            {
+                if (attempts >= 10)
                 {
-                    activeComponent.TimeSinceLastAttack = 0;
-                    Log.Debug(coordinates.ToString());
-                    _weaponTargetingSystem.TryFireWeapon(weapon, weaponComponent, mainShip, coordinates, null);
+                    // stop crashin you cunt
+                    foundValidTile = true;
+                }
+
+                if (TryFindRandomTile(mainShip, out _, out var coordinates))
+                {
+                    validTile = coordinates;
+                }
+
+
+                if (component.LastFiredCoordinates.HasValue)
+                {
+                    if (CorrectDistance(coordinates.Position, component.NoFireDistance, out _))
+                    {
+                        attempts++;
+                        continue;
+                    }
+                    if (CorrectDistance(coordinates.Position, component.NoFireDistance, out var distance))
+                    {
+                        if (TryFindRandomTile(mainShip, out _, out var newCoordinates))
+                        {
+                            if (Vector2.Distance(component.LastFiredCoordinates.Value.Position,
+                                    newCoordinates.Position) > distance)
+                            {
+                                validTile = newCoordinates;
+                            }
+                        }
+                        foundValidTile = true;
+                    }
+                    if (Vector2.Distance(component.LastFiredCoordinates.Value.Position, coordinates.Position) > component.RerollFireDistance)
+                    {
+                        foundValidTile = true;
+                    }
+                }
+                else
+                {
+                    // first time shooting
+                    foundValidTile = true;
                 }
             }
+
+            if (!validTile.HasValue)
+                return;
+
+            activeComponent.TimeSinceLastAttack = 0;
+            component.LastFiredCoordinates = validTile.Value;
+            _weaponTargetingSystem.TryFireWeapon(weapon, weaponComponent, mainShip, validTile.Value, null);
         }
     }
 }

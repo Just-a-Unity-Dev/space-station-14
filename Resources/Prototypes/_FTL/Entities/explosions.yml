@@ -17,9 +17,7 @@
         - state: alert
           shader: unshaded
         - state: outline
-          shader: unshaded
         - state: target
-          shader: unshaded
 
 - type: entity
   id: ExplosionMissile
