@@ -164,6 +164,12 @@ namespace Content.Shared.CCVar
             GameLobbyFallbackPreset = CVarDef.Create("game.fallbackpreset", "Traitor,Extended", CVar.ARCHIVE);
 
         /// <summary>
+        ///     The preset for the game to fall back to if the selected preset could not be used, and fallback is enabled.
+        /// </summary>
+        public static readonly CVarDef<bool>
+            RevealAntagIconsOnRoundEnd = CVarDef.Create("game.reveal_antag_icons_on_roundend", true, CVar.ARCHIVE | CVar.SERVERONLY);
+
+        /// <summary>
         ///     Controls if people can win the game in Suspicion or Deathmatch.
         /// </summary>
         public static readonly CVarDef<bool>

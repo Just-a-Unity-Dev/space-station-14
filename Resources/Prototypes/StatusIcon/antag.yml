@@ -54,9 +54,20 @@
     state: MindShield
 
 - type: statusIcon
-  id: SyndicateFaction
+  id: NukeopFaction # Different from traitors because we want nukeops to distinguish one another but not traitors
   priority: 0
-  locationPreference: Left
+  locationPreference: Right
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Syndicate
+
+- type: statusIcon
+  id: TraitorFaction
+  priority: 0
+  showTo:
+    components:
+    - ShowAntagIcons
+  locationPreference: Right
   icon:
     sprite: /Textures/Interface/Misc/job_icons.rsi
     state: Syndicate

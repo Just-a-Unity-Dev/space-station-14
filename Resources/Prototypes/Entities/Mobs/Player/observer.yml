@@ -48,6 +48,7 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: ShowAntagIcons
 
 - type: entity
   id: ActionGhostBoo
